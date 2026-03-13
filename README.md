@@ -30,6 +30,12 @@
 | Windows | `.exe` |
 | Linux | `.deb` / `.AppImage` |
 
+安装后终端执行：
+
+```shell
+xattr -cr /Applications/ChatMate.app
+```
+
 ## 反馈
 
 如有问题或建议，请在 [Issues](https://github.com/0xxb/chatmate-releases/issues) 中提交。
