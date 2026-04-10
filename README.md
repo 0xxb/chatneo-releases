@@ -30,7 +30,7 @@
 | Windows | `.exe` |
 | Linux | `.deb` / `.AppImage` |
 
-安装后终端执行：
+macOS 安装后需要在终端执行：
 
 ```shell
 xattr -cr /Applications/ChatNeo.app
