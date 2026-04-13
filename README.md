@@ -2,6 +2,9 @@
 
 一个使用 Tauri V2 + React 构建的多 AI 提供商聊天客户端。
 
+> [!WARNING]
+> ChatNeo 目前还处于早期阶段，可能会出现一些 bug。
+
 ## 下载安装
 
 前往 [Releases](https://github.com/0xxb/chatneo-releases/releases) 页面下载最新版本：
