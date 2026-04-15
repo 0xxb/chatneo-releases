@@ -5,6 +5,9 @@ export default defineConfig({
   description: '跨平台 AI 聊天客户端',
   lang: 'zh-CN',
   lastUpdated: true,
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.ico' }],
+  ],
 
   themeConfig: {
     logo: '/images/logo.png',
