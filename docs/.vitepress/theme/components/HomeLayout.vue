@@ -60,10 +60,15 @@ const screenshots = [
   '/images/screenshot-4.png',
 ]
 
+const DEFAULT_SLIDE_INDEX = 1
+const DRAG_THRESHOLD = 6
+
 const visible = ref(false)
-const activeIndex = ref(0)
+const activeIndex = ref(DEFAULT_SLIDE_INDEX)
 const galleryRef = ref<HTMLElement>()
 let isDragging = false
+let didDrag = false
+let pointerDownIndex: number | null = null
 let startX = 0
 let scrollStart = 0
 
@@ -72,29 +77,37 @@ function selectSlide(index: number) {
   scrollToSlide(index)
 }
 
-function scrollToSlide(index: number) {
+function scrollToSlide(index: number, smooth = true) {
   const gallery = galleryRef.value
   if (!gallery) return
   const slide = gallery.children[index] as HTMLElement
   if (!slide) return
   const offset = slide.offsetLeft - gallery.offsetWidth / 2 + slide.offsetWidth / 2
-  gallery.scrollTo({ left: offset, behavior: 'smooth' })
+  gallery.scrollTo({ left: offset, behavior: smooth ? 'smooth' : 'auto' })
 }
 
 function onPointerDown(e: PointerEvent) {
   const gallery = galleryRef.value
   if (!gallery) return
   isDragging = true
+  didDrag = false
+  const target = e.target as HTMLElement | null
+  const item = target?.closest('.gallery-item') as HTMLElement | null
+  pointerDownIndex = item ? Number(item.dataset.index) : null
   startX = e.clientX
   scrollStart = gallery.scrollLeft
   gallery.setPointerCapture(e.pointerId)
-  gallery.style.cursor = 'grabbing'
-  gallery.style.scrollSnapType = 'none'
 }
 
 function onPointerMove(e: PointerEvent) {
   if (!isDragging || !galleryRef.value) return
   const dx = e.clientX - startX
+  if (!didDrag && Math.abs(dx) < DRAG_THRESHOLD) return
+  if (!didDrag) {
+    didDrag = true
+    galleryRef.value.style.cursor = 'grabbing'
+    galleryRef.value.style.scrollSnapType = 'none'
+  }
   galleryRef.value.scrollLeft = scrollStart - dx
 }
 
@@ -104,8 +117,18 @@ function onPointerUp(e: PointerEvent) {
   galleryRef.value.style.cursor = ''
   galleryRef.value.style.scrollSnapType = ''
   galleryRef.value.releasePointerCapture(e.pointerId)
-  // Find closest slide after drag
-  updateActiveFromScroll()
+
+  if (didDrag) {
+    // Find closest slide after drag.
+    updateActiveFromScroll()
+    pointerDownIndex = null
+    return
+  }
+
+  if (pointerDownIndex !== null && !Number.isNaN(pointerDownIndex)) {
+    selectSlide(pointerDownIndex)
+  }
+  pointerDownIndex = null
 }
 
 function updateActiveFromScroll() {
@@ -127,7 +150,11 @@ function updateActiveFromScroll() {
 }
 
 onMounted(() => {
-  requestAnimationFrame(() => { visible.value = true })
+  requestAnimationFrame(() => {
+    visible.value = true
+    activeIndex.value = DEFAULT_SLIDE_INDEX
+    scrollToSlide(DEFAULT_SLIDE_INDEX, false)
+  })
 })
 </script>
 
@@ -171,6 +198,7 @@ onMounted(() => {
           <div
             v-for="(src, i) in screenshots"
             :key="i"
+            :data-index="i"
             class="gallery-item"
             :class="{ active: activeIndex === i }"
             @click="selectSlide(i)"
