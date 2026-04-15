@@ -28,5 +28,5 @@ features:
   - title: 语音交互
     details: Whisper 语音输入 + TTS 语音朗读，支持本地引擎与云端 API。
   - title: 隐私优先
-    details: SQLite 本地存储，支持备份恢复与 WebDAV 云同步，数据由你掌控。
+    details: SQLite 本地存储，支持备份恢复与 WebDAV 云同步。
 ---
