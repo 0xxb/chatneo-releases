@@ -177,7 +177,7 @@ onMounted(() => {
           <span class="hero-tagline-sub">支持 28+ AI 服务提供商，数据本地存储</span>
         </p>
         <div class="hero-actions">
-          <a href="/basic/getting-started" class="btn btn-primary">快速上手</a>
+          <a href="/getting-started" class="btn btn-primary">快速上手</a>
           <a
             href="https://github.com/0xxb/chatneo-releases/releases"
             target="_blank"
@@ -261,7 +261,7 @@ onMounted(() => {
         <h2 class="cta-title">开始使用 ChatNeo</h2>
         <p class="cta-desc">跨平台支持 macOS / Windows / Linux</p>
         <div class="hero-actions">
-          <a href="/basic/getting-started" class="btn btn-primary">查看文档</a>
+          <a href="/getting-started" class="btn btn-primary">查看文档</a>
           <a
             href="https://github.com/0xxb/chatneo-releases/releases"
             target="_blank"
