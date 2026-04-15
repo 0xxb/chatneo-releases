@@ -58,6 +58,8 @@ const screenshots = [
   '/images/screenshot-2.png',
   '/images/screenshot-3.png',
   '/images/screenshot-4.png',
+  '/images/screenshot-5.png',
+  '/images/screenshot-6.png',
 ]
 
 const DEFAULT_SLIDE_INDEX = 1
