@@ -4,6 +4,7 @@ export default defineConfig({
   title: 'ChatNeo',
   description: '跨平台 AI 聊天客户端',
   lang: 'zh-CN',
+  lastUpdated: true,
 
   themeConfig: {
     logo: '/images/logo.png',
@@ -66,6 +67,19 @@ export default defineConfig({
             footer: { selectText: '选择', navigateText: '切换', closeText: '关闭' },
           },
         },
+      },
+    },
+
+    editLink: {
+      pattern: 'https://github.com/0xxb/chatneo-releases/edit/master/docs/:path',
+      text: '在 GitHub 上编辑此页',
+    },
+
+    lastUpdated: {
+      text: '最后更新于',
+      formatOptions: {
+        dateStyle: 'short',
+        timeStyle: 'short',
       },
     },
 
